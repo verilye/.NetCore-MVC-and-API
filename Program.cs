@@ -14,11 +14,15 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-using(var scope = app.Services.CreateScope()){
+using (var scope = app.Services.CreateScope())
+{
     var services = scope.ServiceProvider;
-    try{
+    try
+    {
         SeedData.Initialise(services);
-    }catch(Exception ex){
+    }
+    catch (Exception ex)
+    {
         var logger = services.GetRequiredService<ILogger<Program>>();
         logger.LogError(ex, "An error occurred seeding the DB.");
     }
@@ -41,6 +45,9 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Staff}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "rooms",
+    pattern: "{controller=Room}/{action=Index}/{id?}");
 
 app.Run();

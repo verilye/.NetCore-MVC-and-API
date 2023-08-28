@@ -1,14 +1,14 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FinalAssignment.Models;
 
 namespace FinalAssignment.Controllers;
 
-public class HomeController : Controller
+public class RoomController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<RoomController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public RoomController(ILogger<RoomController> logger)
     {
         _logger = logger;
     }
