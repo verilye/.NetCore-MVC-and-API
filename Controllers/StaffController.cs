@@ -39,6 +39,24 @@ public class StaffController : Controller
     public async Task<IActionResult> Create([Bind("StaffID, FirstName, LastName, Email, MobilePhone")] Staff staff)
     {
 
+        ModelState.Remove("Bookings");
+
+        staff.Bookings = _context.Bookings
+        .Where(b => b.StaffID == staff.StaffID)
+        .ToList();
+
+        foreach (var key in ModelState.Keys)
+        {
+            var state = ModelState[key];
+            if (state.Errors.Count > 0)
+            {
+                foreach (var error in state.Errors)
+                {
+                    Console.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
+                }
+            }
+        }
+
         if (_context.Staff.Any(s => s.StaffID == staff.StaffID))
         {
             ModelState.AddModelError("StaffID", "Staff ID already exists in the database.");
@@ -51,7 +69,7 @@ public class StaffController : Controller
 
         _context.Add(staff);
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Staff");
 
     }
 

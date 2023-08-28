@@ -30,6 +30,7 @@ namespace FinalAssignment.Models
         [RegularExpression(@"^04\d{8}$", ErrorMessage = "Mobile phone must start with '04' followed by 8 digits.")]
         [MaxLength(10)]
         public string? MobilePhone { get; set; }
+        
         public virtual List<Booking> Bookings { get; set; }
     }
 }
