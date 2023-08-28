@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalAssignment.Migrations
 {
     [DbContext(typeof(RoomBookingContext))]
-    [Migration("20230828063749_InitialCreate")]
+    [Migration("20230828064749_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -82,7 +82,6 @@ namespace FinalAssignment.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("MobilePhone")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 

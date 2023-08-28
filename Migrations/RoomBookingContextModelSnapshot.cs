@@ -79,7 +79,6 @@ namespace FinalAssignment.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("MobilePhone")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 

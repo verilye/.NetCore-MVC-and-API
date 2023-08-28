@@ -29,7 +29,7 @@ public class Staff{
 
     [RegularExpression(@"^04\d{8}$")]
     [MaxLength(10)]
-    public string MobilePhone{get;set;}
+    public string? MobilePhone{get;set;}
 
     public virtual List<Booking> Bookings{get;set;}
 
