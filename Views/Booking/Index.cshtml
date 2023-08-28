@@ -1,0 +1,38 @@
+@model List<Booking>
+@{
+    ViewData["Title"] = "Display Bookings";
+}
+<h1 class="display-4">Display all bookings</h1>
+<div class="d-flex">
+    <table>
+        <thead>
+            <tr>
+                <th>StaffID</th>
+                <th>RoomID</th>
+                <th>BookingDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.StaffID</td>
+                    <td>@booking.RoomID</td>
+                    <td>@booking.BookingDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<style>
+    td {
+        padding: 15px;
+        border-left: solid;
+    }
+
+    .row {
+        margin-top: 20px;
+    }
+</style>

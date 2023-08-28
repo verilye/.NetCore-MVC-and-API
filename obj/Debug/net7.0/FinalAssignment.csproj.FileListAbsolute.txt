@@ -101,3 +101,4 @@
 /home/connorlogan/Desktop/FinalAssignment/obj/Debug/net7.0/FinalAssignment.pdb
 /home/connorlogan/Desktop/FinalAssignment/obj/Debug/net7.0/FinalAssignment.genruntimeconfig.cache
 /home/connorlogan/Desktop/FinalAssignment/obj/Debug/net7.0/ref/FinalAssignment.dll
+/home/connorlogan/Desktop/FinalAssignment/bin/Debug/net7.0/Newtonsoft.Json.dll

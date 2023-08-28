@@ -3,6 +3,8 @@ using FinalAssignment.Data;
 using FinalAssignment.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using System.Net.Http.Headers;
+using System.Net.Mime;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,12 @@ builder.Services.AddDbContext<RoomBookingContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient(Options.DefaultName, client =>{
+    client.BaseAddress = new Uri("http://localhost:5200");
+    client.DefaultRequestHeaders.Accept.Add(
+        new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));
+});
 
 var app = builder.Build();
 
