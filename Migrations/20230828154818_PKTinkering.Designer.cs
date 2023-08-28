@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalAssignment.Migrations
 {
     [DbContext(typeof(RoomBookingContext))]
-    [Migration("20230828150412_PKTinkering")]
+    [Migration("20230828154818_PKTinkering")]
     partial class PKTinkering
     {
         /// <inheritdoc />
@@ -30,13 +30,14 @@ namespace FinalAssignment.Migrations
                     b.Property<string>("RoomID")
                         .HasColumnType("nvarchar(8)");
 
-                    b.Property<string>("StaffID")
-                        .HasColumnType("nvarchar(6)");
-
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("RoomID", "StaffID");
+                    b.Property<string>("StaffID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(6)");
+
+                    b.HasKey("RoomID", "BookingDate");
 
                     b.HasIndex("StaffID");
 

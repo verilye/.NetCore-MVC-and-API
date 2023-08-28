@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FinalAssignment.Migrations
 {
     /// <inheritdoc />
-    public partial class CompositePKEdit : Migration
+    public partial class PKTinkering : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,12 +44,12 @@ namespace FinalAssignment.Migrations
                 columns: table => new
                 {
                     RoomID = table.Column<string>(type: "nvarchar(8)", nullable: false),
-                    StaffID = table.Column<string>(type: "nvarchar(6)", nullable: false),
-                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StaffID = table.Column<string>(type: "nvarchar(6)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookings", x => new { x.RoomID, x.StaffID });
+                    table.PrimaryKey("PK_Bookings", x => new { x.RoomID, x.BookingDate });
                     table.ForeignKey(
                         name: "FK_Bookings_Rooms_RoomID",
                         column: x => x.RoomID,

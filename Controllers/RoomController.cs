@@ -41,23 +41,21 @@ public class RoomController : Controller
         booking.Room = _context.Rooms.Find(booking.RoomID);
         booking.Staff = _context.Staff.Find(booking.StaffID);
 
-        Console.WriteLine(booking.Room.RoomID);
-        Console.WriteLine(booking.Staff.StaffID);
+        var existingBooking = _context.Bookings
+            .FirstOrDefault(b => b.RoomID == booking.RoomID && b.BookingDate == booking.BookingDate);
 
-        foreach (var key in ModelState.Keys)
+        if (existingBooking != null)
         {
-            var state = ModelState[key];
-            if (state.Errors.Count > 0)
+            ModelState.AddModelError("booking.BookingDate", "This room is already booked on this day!");
+            var roomBookingModel = new RoomBookingModel
             {
-                foreach (var error in state.Errors)
-                {
-                    Console.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
-                }
-            }
-        }
+                Staff = _context.Staff.ToList(),
+                Rooms = _context.Rooms.ToList(),
+                Booking = booking
+            };
 
-        Console.WriteLine(booking.StaffID);
-        Console.WriteLine(booking.RoomID);
+            return View(roomBookingModel);
+        }
 
         if (!ModelState.IsValid)
         {

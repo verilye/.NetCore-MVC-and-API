@@ -14,12 +14,13 @@ public class Booking{
     [Required(ErrorMessage = "Room ID is required.")]
     public string RoomID{get;set;}
     
+    // Composite Primary Key
+    [Key]
     [Required(ErrorMessage = "Booking date is required.")]
     [DataType(DataType.Date)]
     public DateTime BookingDate{get;set;}
 
-    // Composite Primary Key
-    [Key]
+    
     [Required(ErrorMessage = "Staff ID is required.")]
     public string StaffID{get;set;}
 

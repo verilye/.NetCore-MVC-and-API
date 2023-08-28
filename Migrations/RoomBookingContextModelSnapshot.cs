@@ -27,13 +27,14 @@ namespace FinalAssignment.Migrations
                     b.Property<string>("RoomID")
                         .HasColumnType("nvarchar(8)");
 
-                    b.Property<string>("StaffID")
-                        .HasColumnType("nvarchar(6)");
-
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("RoomID", "StaffID");
+                    b.Property<string>("StaffID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(6)");
+
+                    b.HasKey("RoomID", "BookingDate");
 
                     b.HasIndex("StaffID");
 

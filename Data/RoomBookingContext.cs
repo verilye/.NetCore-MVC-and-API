@@ -13,7 +13,7 @@ public class RoomBookingContext : DbContext{
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<Booking>().HasKey(b => new { b.RoomID, b.StaffID });
+        builder.Entity<Booking>().HasKey(b => new { b.RoomID, b.BookingDate });
     }
 
 }
