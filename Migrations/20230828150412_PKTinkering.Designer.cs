@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalAssignment.Migrations
 {
     [DbContext(typeof(RoomBookingContext))]
-    [Migration("20230828064749_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230828150412_PKTinkering")]
+    partial class PKTinkering
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

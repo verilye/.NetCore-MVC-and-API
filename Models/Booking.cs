@@ -11,19 +11,21 @@ public class Booking{
 
     // Composite Primary Key
     [Key]
-    [Required]
+    [Required(ErrorMessage = "Room ID is required.")]
     public string RoomID{get;set;}
-
-    // Composite Primary Key
-    [Required]
+    
+    [Required(ErrorMessage = "Booking date is required.")]
     [DataType(DataType.Date)]
     public DateTime BookingDate{get;set;}
 
-    [Required]
+    // Composite Primary Key
+    [Key]
+    [Required(ErrorMessage = "Staff ID is required.")]
     public string StaffID{get;set;}
 
-    public Room Room {get;set;}
-    public Staff Staff{get;set;}
+    public virtual Room Room {get;set;}
+
+    public virtual Staff Staff{get;set;}
 
 
 }

@@ -1,22 +1,82 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FinalAssignment.Models;
+using FinalAssignment.Data;
 
 namespace FinalAssignment.Controllers;
 
 public class RoomController : Controller
 {
     private readonly ILogger<RoomController> _logger;
+    private readonly RoomBookingContext _context;
 
-    public RoomController(ILogger<RoomController> logger)
+    public RoomController(ILogger<RoomController> logger, RoomBookingContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
-    public IActionResult Index()
+
+    // GET
+    public IActionResult Book()
     {
-        return View();
+        // Return list of Rooms and Staff
+        RoomBookingModel model = new RoomBookingModel();
+        model.Rooms = _context.Rooms.ToList();
+        model.Staff = _context.Staff.ToList();
+
+        return View(model);
     }
+
+
+    // POST
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Book([FromForm] Booking booking)
+    {
+
+        ModelState.Remove("booking.Room");
+        ModelState.Remove("booking.Staff");
+
+        booking.Room = _context.Rooms.Find(booking.RoomID);
+        booking.Staff = _context.Staff.Find(booking.StaffID);
+
+        Console.WriteLine(booking.Room.RoomID);
+        Console.WriteLine(booking.Staff.StaffID);
+
+        foreach (var key in ModelState.Keys)
+        {
+            var state = ModelState[key];
+            if (state.Errors.Count > 0)
+            {
+                foreach (var error in state.Errors)
+                {
+                    Console.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
+                }
+            }
+        }
+
+        Console.WriteLine(booking.StaffID);
+        Console.WriteLine(booking.RoomID);
+
+        if (!ModelState.IsValid)
+        {
+            var roomBookingModel = new RoomBookingModel
+            {
+                Staff = _context.Staff.ToList(),
+                Rooms = _context.Rooms.ToList(),
+                Booking = booking
+            };
+
+            return View(roomBookingModel);
+        }
+
+        _context.Add(booking);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Index", "Staff");
+    }
+
 
     public IActionResult Privacy()
     {

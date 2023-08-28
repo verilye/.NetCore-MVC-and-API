@@ -8,4 +8,12 @@ public class RoomBookingContext : DbContext{
     public DbSet<Booking> Bookings{get;set;}
     public DbSet<Room> Rooms{get;set;}
     public DbSet<Staff> Staff{get;set;}
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.Entity<Booking>().HasKey(b => new { b.RoomID, b.StaffID });
+    }
+
 }
